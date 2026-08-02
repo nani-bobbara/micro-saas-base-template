@@ -1,0 +1,24 @@
+# TODO: Configure database migration pipeline
+# This workflow runs Drizzle migrations against Neon PostgreSQL
+name: DB Migrations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/adapters/db/**"
+
+jobs:
+  migrate:
+    name: Run Migrations
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      # TODO: Add checkout step
+      # TODO: Add pnpm setup step
+      # TODO: Add Node.js setup step
+      # TODO: Add dependency installation step
+      # TODO: Add migration step using Drizzle Kit
+      # TODO: Ensure DATABASE_URL secret is available
+      - name: Placeholder
+        run: echo "TODO - implement database migration steps"

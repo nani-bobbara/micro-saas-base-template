@@ -1,0 +1,23 @@
+{
+  "name": "@micro-saas/application",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./use-cases/billing": "./use-cases/billing/index.ts",
+    "./use-cases/user": "./use-cases/user/index.ts",
+    "./use-cases/tenant": "./use-cases/tenant/index.ts",
+    "./dtos": "./dtos/index.ts"
+  },
+  "scripts": {
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@micro-saas/domain": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@micro-saas/eslint-config",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./base.js",
+  "files": ["*.js"]
+}

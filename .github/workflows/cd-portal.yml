@@ -1,0 +1,24 @@
+# TODO: Configure portal deployment pipeline
+# This workflow deploys the portal app
+name: CD Portal
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/portal/**"
+      - "packages/**"
+
+jobs:
+  deploy:
+    name: Deploy Portal
+    runs-on: ubuntu-latest
+    steps:
+      # TODO: Add checkout step
+      # TODO: Add pnpm setup step
+      # TODO: Add Node.js setup step
+      # TODO: Add dependency installation step
+      # TODO: Add build step
+      # TODO: Add deployment step (Vercel / Docker)
+      - name: Placeholder
+        run: echo "TODO - implement portal deployment steps"

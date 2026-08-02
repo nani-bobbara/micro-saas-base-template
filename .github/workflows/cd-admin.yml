@@ -1,0 +1,24 @@
+# TODO: Configure admin deployment pipeline
+# This workflow deploys the admin app
+name: CD Admin
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/admin/**"
+      - "packages/**"
+
+jobs:
+  deploy:
+    name: Deploy Admin
+    runs-on: ubuntu-latest
+    steps:
+      # TODO: Add checkout step
+      # TODO: Add pnpm setup step
+      # TODO: Add Node.js setup step
+      # TODO: Add dependency installation step
+      # TODO: Add build step
+      # TODO: Add deployment step (Vercel / Docker)
+      - name: Placeholder
+        run: echo "TODO - implement admin deployment steps"

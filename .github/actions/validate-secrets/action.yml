@@ -1,0 +1,21 @@
+# TODO: Configure reusable validate-secrets action
+# This composite action validates required secrets are present
+name: Validate Secrets
+description: Validates that required environment secrets are configured
+
+inputs:
+  # TODO: Add required secret names as inputs
+  environment:
+    description: Target deployment environment
+    required: true
+
+runs:
+  using: composite
+  steps:
+    # TODO: Add secret validation logic
+    # TODO: Check DATABASE_URL is set
+    # TODO: Check BETTER_AUTH_SECRET is set
+    # TODO: Check STRIPE_SECRET_KEY is set
+    - name: Placeholder
+      shell: bash
+      run: echo "TODO - implement secret validation steps"
