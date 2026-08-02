@@ -1,0 +1,13 @@
+{
+  "name": "@micro-saas/config",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./index.ts",
+  "scripts": {
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "zod": "^3.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+# TODO: Configure reusable setup-env action
+# This composite action sets up the development environment
+name: Setup Environment
+description: Sets up Node.js, pnpm, and installs dependencies
+
+inputs:
+  node-version:
+    description: Node.js version to use
+    required: false
+    default: "18"
+  # TODO: Add additional inputs as needed
+
+runs:
+  using: composite
+  steps:
+    # TODO: Add pnpm setup step
+    # TODO: Add Node.js setup step
+    # TODO: Add dependency installation step
+    - name: Placeholder
+      shell: bash
+      run: echo "TODO - implement setup-env action steps"

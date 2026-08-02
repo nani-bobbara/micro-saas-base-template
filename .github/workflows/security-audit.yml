@@ -1,0 +1,23 @@
+# TODO: Configure security audit pipeline
+# This workflow runs security audits on dependencies
+name: Security Audit
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  push:
+    branches: [main]
+
+jobs:
+  audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      # TODO: Add checkout step
+      # TODO: Add pnpm setup step
+      # TODO: Add Node.js setup step
+      # TODO: Add pnpm audit step
+      # TODO: Add CodeQL analysis step
+      # TODO: Add Dependabot alerts review step
+      - name: Placeholder
+        run: echo "TODO - implement security audit steps"
