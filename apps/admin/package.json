@@ -1,23 +1,29 @@
 {
-  "name": "@micro-saas/admin",
-  "version": "0.0.1",
+  "name": "@apps/admin",
   "private": true,
+  "version": "0.0.0",
+  "description": "Admin Next.js delivery layer.",
   "scripts": {
     "dev": "next dev --port 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 3001",
     "lint": "next lint",
-    "clean": "rm -rf .next"
+    "typecheck": "tsc --noEmit",
+    "test": "node -e \"console.log('No tests configured yet for @apps/admin')\""
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@packages/config": "workspace:*",
+    "@packages/adapters-db": "workspace:*",
+    "next": "15.0.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "typescript": "^5.0.0"
+    "@types/node": "22.13.10",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "eslint": "9.18.0",
+    "eslint-config-next": "15.0.3",
+    "typescript": "5.7.3"
   }
 }

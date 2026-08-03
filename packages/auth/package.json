@@ -1,23 +1,6 @@
 {
-  "name": "@micro-saas/auth",
-  "version": "0.0.1",
+  "name": "@packages/auth",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
-  "exports": {
-    ".": "./index.ts",
-    "./config": "./config.ts",
-    "./session": "./session.ts",
-    "./guards": "./guards.ts"
-  },
-  "scripts": {
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@micro-saas/adapter-db": "workspace:*",
-    "@micro-saas/domain": "workspace:*"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "version": "0.0.0",
+  "description": "TODO: Shared auth abstractions for apps."
 }

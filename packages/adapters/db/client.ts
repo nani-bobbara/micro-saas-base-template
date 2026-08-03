@@ -1,18 +1,45 @@
-// TODO: Configure Drizzle ORM client with Neon PostgreSQL
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
-// import * as schema from "./schema";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
-// TODO: Import env to get DATABASE_URL
-// import { env } from "@micro-saas/config/env";
+const connectionString = process.env.DATABASE_URL;
 
-export function createDb(databaseUrl: string) {
-  const sql = neon(databaseUrl);
-  return drizzle(sql, {
-    // schema,
-    // TODO: Enable logger in development
-  });
+let sqlClient: postgres.Sql | null = null;
+let dbClient: ReturnType<typeof drizzle> | null = null;
+
+if (connectionString) {
+	sqlClient = postgres(connectionString, {
+		prepare: false,
+		ssl: "require"
+	});
+	dbClient = drizzle(sqlClient);
 }
 
-// TODO: Export singleton db instance
-// export const db = createDb(env.DATABASE_URL);
+export function getDb() {
+	if (!dbClient) {
+		throw new Error("DATABASE_URL is not configured");
+	}
+	return dbClient;
+}
+
+export async function getDbHealth() {
+	if (!sqlClient) {
+		return {
+			ok: false,
+			reason: "DATABASE_URL is not configured"
+		} as const;
+	}
+
+	try {
+		await sqlClient`select 1 as health`;
+		return {
+			ok: true
+		} as const;
+	} catch (error) {
+		const message = error instanceof Error ? error.message : "unknown database error";
+		return {
+			ok: false,
+			reason: "database connection failed",
+			detail: process.env.NODE_ENV === "development" ? message : undefined
+		} as const;
+	}
+}

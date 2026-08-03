@@ -1,24 +1,61 @@
-# TODO: Configure admin deployment pipeline
-# This workflow deploys the admin app
 name: CD Admin
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "apps/admin/**"
       - "packages/**"
+      - "pnpm-lock.yaml"
+
+permissions:
+  contents: read
 
 jobs:
-  deploy:
-    name: Deploy Admin
+  deploy-admin:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
-      # TODO: Add checkout step
-      # TODO: Add pnpm setup step
-      # TODO: Add Node.js setup step
-      # TODO: Add dependency installation step
-      # TODO: Add build step
-      # TODO: Add deployment step (Vercel / Docker)
-      - name: Placeholder
-        run: echo "TODO - implement admin deployment steps"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+
+      - name: Validate deployment secrets
+        uses: ./.github/actions/validate-secrets
+        with:
+          required: "${{ secrets.VERCEL_TOKEN }},${{ secrets.VERCEL_ORG_ID }},${{ secrets.VERCEL_PROJECT_ID_ADMIN }},${{ secrets.NEON_DATABASE_URL }},${{ secrets.STRIPE_SECRET_KEY }}"
+
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel
+
+      - name: Stripe key format check
+        env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+        run: |
+          if [[ "${STRIPE_SECRET_KEY}" != sk_* ]]; then
+            echo "Invalid STRIPE_SECRET_KEY format"
+            exit 1
+          fi
+          echo "Stripe secret format looks valid"
+
+      - name: Pull Vercel environment
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+        run: vercel pull --cwd apps/admin --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build admin artifacts
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+        run: vercel build --cwd apps/admin --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy admin to Vercel
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+        run: vercel deploy --cwd apps/admin --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

@@ -1,24 +1,59 @@
-# TODO: Configure database migration pipeline
-# This workflow runs Drizzle migrations against Neon PostgreSQL
 name: DB Migrations
 
 on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        required: true
+        type: choice
+        default: production
+        options:
+          - staging
+          - production
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "packages/adapters/db/**"
 
+permissions:
+  contents: read
+
 jobs:
   migrate:
-    name: Run Migrations
     runs-on: ubuntu-latest
-    environment: production
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'production' }}
     steps:
-      # TODO: Add checkout step
-      # TODO: Add pnpm setup step
-      # TODO: Add Node.js setup step
-      # TODO: Add dependency installation step
-      # TODO: Add migration step using Drizzle Kit
-      # TODO: Ensure DATABASE_URL secret is available
-      - name: Placeholder
-        run: echo "TODO - implement database migration steps"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+
+      - name: Validate secrets
+        uses: ./.github/actions/validate-secrets
+        with:
+          required: "${{ secrets.NEON_API_KEY }},${{ secrets.NEON_PROJECT_ID }},${{ secrets.DATABASE_URL }}"
+
+      - name: Install Neon CLI
+        run: pnpm add -g @neondatabase/cli
+
+      - name: Verify Neon CLI
+        run: |
+          if command -v neon >/dev/null 2>&1; then
+            neon --version
+          elif command -v neonctl >/dev/null 2>&1; then
+            neonctl --version
+          else
+            echo "Neon CLI command not found after install"
+            exit 1
+          fi
+
+      - name: Run migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          echo "Applying Drizzle migrations to Neon database"
+          pnpm -C packages/adapters/db db:migrate

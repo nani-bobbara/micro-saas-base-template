@@ -1,21 +1,17 @@
 {
   "name": "micro-saas-base-template",
   "private": true,
+  "version": "0.0.0",
+  "description": "Micro SaaS base template with Hexagonal Architecture, DDD, and multi-app delivery.",
+  "packageManager": "pnpm@10.0.0",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "clean": "turbo run clean",
-    "db:generate": "turbo run db:generate",
-    "db:migrate": "turbo run db:migrate"
-  },
-  "devDependencies": {
-    "turbo": "latest",
-    "typescript": "^5.0.0"
-  },
-  "engines": {
-    "node": ">=18",
-    "pnpm": ">=8"
-  },
-  "packageManager": "pnpm@8.15.0"
+    "dev": "corepack pnpm --filter @apps/portal dev",
+    "dev:portal": "corepack pnpm --filter @apps/portal dev",
+    "dev:admin": "corepack pnpm --filter @apps/admin dev",
+    "build": "corepack pnpm -r --if-present build",
+    "lint": "corepack pnpm -r --if-present lint",
+    "typecheck": "corepack pnpm -r --if-present typecheck",
+    "test": "corepack pnpm -r --if-present test",
+    "format:check": "corepack pnpm -r --if-present format:check"
+  }
 }

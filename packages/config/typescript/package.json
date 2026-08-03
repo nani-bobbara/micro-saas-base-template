@@ -1,6 +1,6 @@
 {
-  "name": "@micro-saas/typescript-config",
-  "version": "0.0.1",
+  "name": "@packages/config-typescript",
   "private": true,
-  "files": ["*.json"]
+  "version": "0.0.0",
+  "description": "TODO: Shared TypeScript config package."
 }

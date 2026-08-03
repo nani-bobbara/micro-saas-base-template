@@ -1,5 +1,5 @@
 // TODO: Implement CancelSubscription use case
-import type { IBillingPort } from "@micro-saas/domain/ports";
+import type { IBillingPort } from "@packages/domain";
 
 export interface CancelSubscriptionInput {
   // TODO: Define input DTO

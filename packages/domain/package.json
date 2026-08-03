@@ -1,20 +1,16 @@
 {
-  "name": "@micro-saas/domain",
-  "version": "0.0.1",
+  "name": "@packages/domain",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "version": "0.0.0",
+  "description": "Pure domain layer (no external dependencies).",
+  "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./entities": "./entities/index.ts",
-    "./ports": "./ports/index.ts",
-    "./value-objects": "./value-objects/index.ts",
-    "./errors": "./errors/index.ts"
+    ".": "./index.ts"
   },
   "scripts": {
-    "lint": "tsc --noEmit"
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "5.7.3"
   }
 }

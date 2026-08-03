@@ -1,11 +1,6 @@
 {
-  "name": "@micro-saas/tailwind-config",
-  "version": "0.0.1",
+  "name": "@packages/config-tailwind",
   "private": true,
-  "main": "./base.ts",
-  "types": "./base.ts",
-  "devDependencies": {
-    "tailwindcss": "^3.4.0",
-    "typescript": "^5.0.0"
-  }
+  "version": "0.0.0",
+  "description": "TODO: Shared Tailwind config package."
 }

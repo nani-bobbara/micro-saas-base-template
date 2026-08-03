@@ -1,5 +1,5 @@
 // TODO: Implement CreateTenant use case
-import type { ITenantRepository } from "@micro-saas/domain/ports";
+import type { ITenantRepository } from "@packages/domain";
 
 export interface CreateTenantInput {
   // TODO: Define input DTO

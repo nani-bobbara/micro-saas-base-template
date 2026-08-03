@@ -1,2 +1,2 @@
-// TODO: Export config modules
+export * as EnvConfig from "./env";
 export * from "./env";

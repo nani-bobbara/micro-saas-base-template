@@ -1,6 +1,18 @@
-// TODO: Add API route handlers
-// Example: health check endpoint
+import { getDbHealth } from "@packages/adapters-db";
+import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
+
 export async function GET() {
-  // TODO: Implement health check
-  return Response.json({ status: "ok" });
+	const db = await getDbHealth();
+	const status = db.ok ? 200 : 503;
+
+	return NextResponse.json(
+		{
+			app: "portal",
+			db,
+			timestamp: new Date().toISOString()
+		},
+		{ status }
+	);
 }

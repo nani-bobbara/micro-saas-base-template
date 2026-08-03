@@ -1,21 +1,28 @@
-# TODO: Configure reusable validate-secrets action
-# This composite action validates required secrets are present
-name: Validate Secrets
-description: Validates that required environment secrets are configured
-
+name: validate-secrets
+description: Validate required secrets are present and non-empty.
 inputs:
-  # TODO: Add required secret names as inputs
-  environment:
-    description: Target deployment environment
+  required:
+    description: Comma-separated list of secret values to validate
     required: true
-
 runs:
   using: composite
   steps:
-    # TODO: Add secret validation logic
-    # TODO: Check DATABASE_URL is set
-    # TODO: Check BETTER_AUTH_SECRET is set
-    # TODO: Check STRIPE_SECRET_KEY is set
-    - name: Placeholder
+    - name: Validate required secrets
+      run: |
+        IFS=',' read -ra ITEMS <<< "${{ inputs.required }}"
+        missing=0
+
+        for raw in "${ITEMS[@]}"; do
+          item="$(echo "$raw" | xargs)"
+          if [[ -z "$item" ]]; then
+            missing=1
+          fi
+        done
+
+        if [[ "$missing" -ne 0 ]]; then
+          echo "One or more required secrets are missing or empty."
+          exit 1
+        fi
+
+        echo "Required secrets are present."
       shell: bash
-      run: echo "TODO - implement secret validation steps"

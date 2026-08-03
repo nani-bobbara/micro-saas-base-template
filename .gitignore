@@ -1,40 +1,27 @@
-# Dependencies
+# dependencies
 node_modules/
-.pnp
-.pnp.js
 
-# Build outputs
+# pnpm
+.pnpm-store/
+
+# Next.js
 .next/
+apps/*/.next/
+
+# build outputs
 dist/
 build/
-out/
+coverage/
 
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# Turbo cache
+# turbo
 .turbo/
 
-# OS files
-.DS_Store
-Thumbs.db
+# env files
+.env
+.env.*
+!.env.example
 
-# Logs
+# local artifacts
 *.log
-npm-debug.log*
-pnpm-debug.log*
-
-# Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Test coverage
-coverage/
-.nyc_output/
-
-# Drizzle
-drizzle/
+.DS_Store
+*.tsbuildinfo

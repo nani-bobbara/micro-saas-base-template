@@ -1,17 +1,10 @@
 {
-  "name": "@micro-saas/adapter-auth",
-  "version": "0.0.1",
+  "name": "@packages/adapters-auth",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
-  "scripts": {
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@micro-saas/adapter-db": "workspace:*",
-    "@micro-saas/domain": "workspace:*"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0"
+  "version": "0.0.0",
+  "description": "BetterAuth adapter package.",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
   }
 }

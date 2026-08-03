@@ -1,25 +1,35 @@
-# TODO: Configure CI validation pipeline
-# This workflow runs on every push and pull request
 name: CI Validate
 
 on:
   push:
-    branches: [main, develop]
+    branches:
+      - main
   pull_request:
-    branches: [main, develop]
+
+permissions:
+  contents: read
 
 jobs:
   validate:
-    name: Validate
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      # TODO: Add checkout step
-      # TODO: Add pnpm setup step
-      # TODO: Add Node.js setup step
-      # TODO: Add dependency installation step
-      # TODO: Add lint step
-      # TODO: Add type-check step
-      # TODO: Add test step
-      # TODO: Add build step
-      - name: Placeholder
-        run: echo "TODO - implement CI validation steps"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          node-version: "20"
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build

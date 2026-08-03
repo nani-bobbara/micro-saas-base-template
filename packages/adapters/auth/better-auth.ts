@@ -1,18 +1,20 @@
-// TODO: Configure BetterAuth adapter
-// import { betterAuth } from "better-auth";
-// import { drizzleAdapter } from "better-auth/adapters/drizzle";
-// import { db } from "@micro-saas/adapter-db";
+export interface BetterAuthAdapterConfig {
+	baseUrl: string;
+	secret: string;
+}
 
-export const auth = {
-  // TODO: Configure BetterAuth instance
-  // handler: betterAuth({
-  //   database: drizzleAdapter(db, { provider: "pg" }),
-  //   emailAndPassword: { enabled: true },
-  //   socialProviders: {
-  //     // TODO: Add OAuth providers (Google, GitHub, etc.)
-  //   },
-  //   plugins: [
-  //     // TODO: Add BetterAuth plugins (organization, etc.)
-  //   ],
-  // }),
-};
+export interface BetterAuthAdapter {
+	getSessionFromHeaders(headers: Headers): Promise<{ userId: string; tenantId: string } | null>;
+}
+
+export function createBetterAuthAdapter(config: BetterAuthAdapterConfig): BetterAuthAdapter {
+	if (!config.baseUrl || !config.secret) {
+		throw new Error("BetterAuth adapter requires baseUrl and secret");
+	}
+
+	return {
+		async getSessionFromHeaders() {
+			return null;
+		}
+	};
+}

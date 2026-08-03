@@ -1,6 +1,6 @@
 // TODO: Implement UpdateUserProfile use case
-import type { IUserRepository } from "@micro-saas/domain/ports";
-import { UserNotFoundError } from "@micro-saas/domain/errors";
+import type { IUserRepository } from "@packages/domain";
+import { UserNotFoundError } from "@packages/domain";
 
 export interface UpdateUserProfileInput {
   // TODO: Define input DTO

@@ -1,7 +1,6 @@
 {
-  "name": "@micro-saas/eslint-config",
-  "version": "0.0.1",
+  "name": "@packages/config-eslint",
   "private": true,
-  "main": "./base.js",
-  "files": ["*.js"]
+  "version": "0.0.0",
+  "description": "TODO: Shared ESLint config package."
 }

@@ -1,21 +1,22 @@
-# TODO: Configure reusable setup-env action
-# This composite action sets up the development environment
-name: Setup Environment
-description: Sets up Node.js, pnpm, and installs dependencies
-
+name: setup-env
+description: Setup Node.js, pnpm, and repository dependencies.
 inputs:
   node-version:
-    description: Node.js version to use
+    description: Node.js version
     required: false
-    default: "18"
-  # TODO: Add additional inputs as needed
-
+    default: "20"
 runs:
   using: composite
   steps:
-    # TODO: Add pnpm setup step
-    # TODO: Add Node.js setup step
-    # TODO: Add dependency installation step
-    - name: Placeholder
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
       shell: bash
-      run: echo "TODO - implement setup-env action steps"

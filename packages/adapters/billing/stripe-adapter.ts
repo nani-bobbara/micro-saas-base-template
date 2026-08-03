@@ -1,30 +1,24 @@
-// TODO: Implement StripeBillingAdapter
-// This implements the IBillingPort from packages/domain/ports
-import type { IBillingPort, CreateCheckoutSessionInput } from "@micro-saas/domain/ports";
+import type { CreateCheckoutSessionInput, CreateCheckoutSessionResult, IBillingPort } from "@packages/domain";
 
-export class StripeBillingAdapter implements IBillingPort {
-  // private readonly stripe: Stripe;
+export interface StripeAdapterConfig {
+	secretKey: string;
+}
 
-  constructor(
-    // TODO: Accept Stripe secret key or Stripe instance
-    private readonly stripeSecretKey: string,
-  ) {
-    // TODO: Initialize Stripe client
-    // this.stripe = new Stripe(stripeSecretKey, { apiVersion: "2024-04-10" });
-  }
+export class StripeAdapter implements IBillingPort {
+	constructor(private readonly config: StripeAdapterConfig) {
+		if (!config.secretKey.startsWith("sk_")) {
+			throw new Error("Invalid Stripe secret key format");
+		}
+	}
 
-  async createCheckoutSession(input: CreateCheckoutSessionInput): Promise<{ url: string }> {
-    // TODO: Implement Stripe checkout session creation
-    throw new Error("TODO: Implement createCheckoutSession");
-  }
+	async createCheckoutSession(input: CreateCheckoutSessionInput): Promise<CreateCheckoutSessionResult> {
+		return {
+			id: `stub_${input.tenantId}`,
+			url: `${input.successUrl}?session=stub`
+		};
+	}
 
-  async createCustomer(tenantId: string, email: string): Promise<{ customerId: string }> {
-    // TODO: Implement Stripe customer creation
-    throw new Error("TODO: Implement createCustomer");
-  }
-
-  async cancelSubscription(subscriptionId: string): Promise<void> {
-    // TODO: Implement Stripe subscription cancellation
-    throw new Error("TODO: Implement cancelSubscription");
-  }
+	async cancelSubscription(): Promise<void> {
+		return;
+	}
 }

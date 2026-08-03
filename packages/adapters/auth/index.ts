@@ -1,2 +1,1 @@
-// TODO: Export BetterAuth adapter
-// export { auth } from "./better-auth";
+export * from "./better-auth";

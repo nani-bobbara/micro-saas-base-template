@@ -1,6 +1,6 @@
 // TODO: Implement GetUserProfile use case
-import type { IUserRepository } from "@micro-saas/domain/ports";
-import { UserNotFoundError } from "@micro-saas/domain/errors";
+import type { IUserRepository } from "@packages/domain";
+import { UserNotFoundError } from "@packages/domain";
 
 export interface GetUserProfileInput {
   userId: string;

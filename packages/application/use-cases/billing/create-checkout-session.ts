@@ -1,5 +1,5 @@
 // TODO: Implement CreateCheckoutSession use case
-import type { IBillingPort } from "@micro-saas/domain/ports";
+import type { IBillingPort } from "@packages/domain";
 
 export interface CreateCheckoutSessionInput {
   // TODO: Define input DTO

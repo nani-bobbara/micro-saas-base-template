@@ -1,35 +1,20 @@
-// TODO: Define base domain error class
-
-export abstract class DomainError extends Error {
-  abstract readonly code: string;
-
-  constructor(message: string) {
-    super(message);
-    this.name = this.constructor.name;
-  }
+export class DomainError extends Error {
+	constructor(message: string, public readonly code: string) {
+		super(message);
+		this.name = "DomainError";
+	}
 }
 
-// TODO: Add specific domain error classes
 export class UserNotFoundError extends DomainError {
-  readonly code = "USER_NOT_FOUND";
-
-  constructor(id: string) {
-    super(`User with id ${id} not found`);
-  }
+	constructor(userId: string) {
+		super(`User not found: ${userId}`, "USER_NOT_FOUND");
+		this.name = "UserNotFoundError";
+	}
 }
 
 export class TenantNotFoundError extends DomainError {
-  readonly code = "TENANT_NOT_FOUND";
-
-  constructor(id: string) {
-    super(`Tenant with id ${id} not found`);
-  }
-}
-
-export class UnauthorizedError extends DomainError {
-  readonly code = "UNAUTHORIZED";
-
-  constructor(message = "Unauthorized") {
-    super(message);
-  }
+	constructor(tenantId: string) {
+		super(`Tenant not found: ${tenantId}`, "TENANT_NOT_FOUND");
+		this.name = "TenantNotFoundError";
+	}
 }

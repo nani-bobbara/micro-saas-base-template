@@ -1,4 +1,0 @@
-// TODO: Add docs layout
-export default function DocsLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
